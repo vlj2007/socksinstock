@@ -1,4 +1,9 @@
 package ru.home.socksinstock.api;
 
-public class SockInterface {
+import ru.home.socksinstock.model.Sock;
+
+public interface SockInterface {
+    Sock createdSock(Sock sock);
+
+
 }
