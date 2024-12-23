@@ -3,9 +3,11 @@ package ru.home.socksinstock.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.home.socksinstock.api.SockInterface;
+import ru.home.socksinstock.exception.BadRequestException;
 import ru.home.socksinstock.model.Sock;
 import ru.home.socksinstock.repository.SockRepository;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Collection;
 
@@ -21,7 +23,10 @@ public class SockService implements SockInterface {
         this.sockRepository = sockRepository;
     }
 
-    // Метод создания носков
+    /***
+     * Метод создающий носки
+     */
+
     @Override
     public Sock createdSock(Sock sock) {
         sock.setId(++count);
@@ -29,22 +34,39 @@ public class SockService implements SockInterface {
         return sock;
     }
 
-    // метод поиска носков
+    /***
+     * Метод ищущий носки
+     */
+
     public Sock findSock(Long id){
-        return socksMap.get(id);
+        if(id == null){
+            return sockRepository.findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
+        }
+        return sockRepository.findById(id).get();
     }
 
-    // метод редактирования носков
+    /***
+     * Метод редактирования носка по id
+     */
+
     public Sock editSock(Sock sock){
         socksMap.put(sock.getId(), sock);
         return sock;
     }
+
+    /***
+     * Метод удаления носка по id
+     */
+
     // Метод удаления носков
     public Sock deleteSock(Long id){
         return socksMap.remove(id);
     }
 
-    // Метод получения всех носков
+    /***
+     * Метод получения всех коллекции носков
+     */
+
     public Collection<Sock> getAllSock(){
         return socksMap.values();
     }
