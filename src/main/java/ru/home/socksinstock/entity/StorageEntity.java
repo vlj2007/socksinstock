@@ -1,9 +1,9 @@
 package ru.home.socksinstock.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import ru.home.socksinstock.model.Sock;
+
+import java.util.List;
 
 @Entity
 @Table(name = "STORAGE")
@@ -18,6 +18,8 @@ public class StorageEntity {
     @Column(name = "QUANTITY")
     private int quantity;
 
+    @ManyToMany
+    List<Sock> likesSock;
 
 
 }

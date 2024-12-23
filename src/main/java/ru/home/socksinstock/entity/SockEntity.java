@@ -1,9 +1,7 @@
 package ru.home.socksinstock.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import ru.home.socksinstock.model.Storage;
 
 import java.util.Objects;
 
@@ -11,6 +9,7 @@ import java.util.Objects;
 @Table(name = "SOCK")
 public class SockEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "MANUFACTURER")
     private String manufacturer;
@@ -20,6 +19,7 @@ public class SockEntity {
     private int percentageOfCotton;
     @Column(name = "QUANTITY")
     private int quantity;
+
 
     public SockEntity() {
     }

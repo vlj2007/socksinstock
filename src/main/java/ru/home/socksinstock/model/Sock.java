@@ -1,11 +1,9 @@
 package ru.home.socksinstock.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 @Schema(description = "Информация о носке")
 @Entity
@@ -13,6 +11,7 @@ import java.util.Objects;
 public class Sock {
     @Id
     @Schema(description = "Идентификатор")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "MANUFACTURER")
@@ -30,6 +29,10 @@ public class Sock {
     @Column(name = "QUANTITY")
     @Schema(description = "Количество")
     private int quantity;
+
+
+    @ManyToMany
+    List<Storage> likedStorage;
 
     public Sock() {
     }
