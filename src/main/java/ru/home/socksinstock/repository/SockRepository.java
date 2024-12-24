@@ -7,8 +7,8 @@ import java.util.List;
 
 @Repository
 public interface SockRepository extends JpaRepository<Sock, Long> {
-    List<Sock> findSockById(Long id);
-    List<Sock> findSockByColor(String color);
-    List<Sock> findSockByManufacturer(String manufacturer);
-    List<Sock> findSockByPercentageOfCotton(int percentageOfCotton);
+//    List<Sock> findSockById(Long id);
+//    List<Sock> findSockByColor(String color);
+//    List<Sock> findSockByManufacturer(String manufacturer);
+//    List<Sock> findSockByPercentageOfCotton(int percentageOfCotton);
 }

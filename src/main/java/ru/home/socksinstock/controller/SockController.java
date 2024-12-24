@@ -76,7 +76,7 @@ public class SockController {
 
     @DeleteMapping("/delete/{id}") // http://localhost:8080/api/socks/delete/1
     @Operation(summary = "Удалить информацию о носках по его id")
-    public ResponseEntity<Sock> deleteSock(@PathVariable Long id){
+    public ResponseEntity deleteSock(@PathVariable Long id){
         sockService.deleteSock(id);
         return ResponseEntity.ok().build();
     }
