@@ -31,18 +31,25 @@ public class Sock {
     private int quantity;
 
 
-    @ManyToMany
-    List<Storage> likedStorage;
+//    @ManyToMany//(mappedBy = "storageList",fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "storage_like",
+//            joinColumns = @JoinColumn(name = "sock_id"),
+//            inverseJoinColumns = @JoinColumn(name = "storage_id"))
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Storage> likedStorage;
 
     public Sock() {
     }
 
-    public Sock(Long id, String manufacturer, String color, int percentageOfCotton, int quantity) {
+    public Sock(Long id, String manufacturer, String color, int percentageOfCotton, int quantity, List<Storage> likedStorage) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.color = color;
         this.percentageOfCotton = percentageOfCotton;
         this.quantity = quantity;
+        this.likedStorage = likedStorage;
     }
 
     public Long getId() {
@@ -85,17 +92,25 @@ public class Sock {
         this.quantity = quantity;
     }
 
+    public List<Storage> getLikedStorage() {
+        return likedStorage;
+    }
+
+    public void setLikedStorage(List<Storage> likedStorage) {
+        this.likedStorage = likedStorage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sock sock = (Sock) o;
-        return percentageOfCotton == sock.percentageOfCotton && quantity == sock.quantity && Objects.equals(id, sock.id) && Objects.equals(manufacturer, sock.manufacturer) && Objects.equals(color, sock.color);
+        return percentageOfCotton == sock.percentageOfCotton && quantity == sock.quantity && Objects.equals(id, sock.id) && Objects.equals(manufacturer, sock.manufacturer) && Objects.equals(color, sock.color) && Objects.equals(likedStorage, sock.likedStorage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, manufacturer, color, percentageOfCotton, quantity);
+        return Objects.hash(id, manufacturer, color, percentageOfCotton, quantity, likedStorage);
     }
 
     @Override
@@ -106,6 +121,7 @@ public class Sock {
                 ", color='" + color + '\'' +
                 ", percentageOfCotton=" + percentageOfCotton +
                 ", quantity=" + quantity +
+                ", likedStorage=" + likedStorage +
                 '}';
     }
 }

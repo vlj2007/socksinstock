@@ -20,8 +20,8 @@ public class Storage {
     @Schema(description = "Улица")
     private String Street;
 
-    @ManyToMany
-    List<Sock> likedSock;
+    @ManyToMany(mappedBy = "likedStorage")
+    private List<Sock> likedSock;
 
 
     public Storage() {

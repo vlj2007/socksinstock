@@ -90,10 +90,4 @@ public class SockController {
     public ResponseEntity<Collection<Sock>> getAllSock(){
         return ResponseEntity.ok(sockService.getAllSock());
     }
-
-
-
-
-
-
 }
