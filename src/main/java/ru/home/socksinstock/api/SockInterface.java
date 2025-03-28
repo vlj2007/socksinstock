@@ -1,9 +1,9 @@
 package ru.home.socksinstock.api;
 
-import ru.home.socksinstock.model.Sock;
+import ru.home.socksinstock.dto.SockDto;
 
 public interface SockInterface {
-    Sock createdSock(Sock sock);
+    SockDto createdSock(SockDto sockDto);
 
 
 }

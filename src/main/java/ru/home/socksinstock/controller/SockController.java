@@ -1,18 +1,16 @@
 package ru.home.socksinstock.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.Min;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.home.socksinstock.model.Sock;
+import ru.home.socksinstock.dto.SockDto;
 import ru.home.socksinstock.service.SockService;
 
 import java.util.Collection;
-
+@NoArgsConstructor
 @RestController
 @RequestMapping("/api/socks")
 @Tag(
@@ -21,7 +19,7 @@ import java.util.Collection;
 )
 public class SockController {
 
-    private final SockService sockService;
+    private SockService sockService;
 
 
     public SockController(SockService sockService){
@@ -34,8 +32,8 @@ public class SockController {
 
     @PostMapping //POST localhost:8080/api/socks/1
     @Operation(summary = "Создать носок")
-    public Sock createSock(@RequestBody Sock sock){
-        return sockService.createdSock(sock);
+    public SockDto createSock(@RequestBody SockDto sockDto){
+        return sockService.createdSock(sockDto);
     }
 
     /***
@@ -48,12 +46,12 @@ public class SockController {
             description = "Get endpoint for manager"
     )
     //@Parameter(description = "id носка")
-    public ResponseEntity<Sock> getSockInfo(@PathVariable Long id){
-        Sock sock = sockService.findSock(id);
-        if(sock == null){
+    public ResponseEntity<SockDto> getSockInfo(@PathVariable Long id){
+        SockDto sockDto = sockService.findSock(id);
+        if(sockDto == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(sock);
+        return ResponseEntity.ok(sockDto);
     }
 
     /***
@@ -62,8 +60,8 @@ public class SockController {
 
     @PutMapping("/edit/{id}") // http://localhost:8080/api/socks/edit/1
     @Operation(summary = "Отредактировать информацию о носках")
-    public ResponseEntity<Sock> editSock(@RequestBody Sock sock){
-        Sock foundSock = sockService.editSock(sock);
+    public ResponseEntity<SockDto> editSock(@RequestBody SockDto sockDto){
+        SockDto foundSock = sockService.editSock(sockDto);
         if (foundSock == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -87,7 +85,7 @@ public class SockController {
 
     @GetMapping(path = "/all") // http://localhost:8080/api/socks/all
     @Operation(summary = "Вывести всю информацию о носках")
-    public ResponseEntity<Collection<Sock>> getAllSock(){
+    public ResponseEntity<Collection<SockDto>> getAllSock(){
         return ResponseEntity.ok(sockService.getAllSock());
     }
 }

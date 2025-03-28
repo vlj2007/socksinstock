@@ -1,17 +1,19 @@
 package ru.home.socksinstock.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.home.socksinstock.api.SockInterface;
-import ru.home.socksinstock.model.Sock;
+import ru.home.socksinstock.dto.SockDto;
+import ru.home.socksinstock.entity.SockEntity;
 import ru.home.socksinstock.repository.SockRepository;
 
 import java.util.Collection;
 
+@NoArgsConstructor
 @Service
 public class SockService implements SockInterface {
 
-    private final SockRepository sockRepository;
+    private SockRepository sockRepository;
 
     public SockService(SockRepository sockRepository) {
         this.sockRepository = sockRepository;
@@ -22,24 +24,27 @@ public class SockService implements SockInterface {
      */
 
     @Override
-    public Sock createdSock(Sock sock) {
-        return sockRepository.save(sock);
+    public SockDto createdSock(SockDto sock) {
+        //return sockRepository.save(sock);
+        return null;
     }
 
     /***
      * Метод ищущий носки
      */
 
-    public Sock findSock(Long id){
-        return sockRepository.findById(id).get();
+    public SockDto findSock(Long id){
+//        return sockRepository.findById(id).get();
+        return null;
     }
 
     /***
      * Метод редактирования носка по id
      */
 
-    public Sock editSock(Sock sock){
-        return sockRepository.save(sock);
+    public SockDto editSock(SockDto sockDto){
+//        return sockRepository.save(sockDto);
+        return null;
 
     }
 
@@ -56,8 +61,10 @@ public class SockService implements SockInterface {
      * Метод получения всех коллекции носков
      */
 
-    public Collection<Sock> getAllSock(){
-        return sockRepository.findAll();
+    public Collection<SockDto> getAllSock(){
+//        return sockRepository.findAll();
+        return null;
     }
+
 
 }
