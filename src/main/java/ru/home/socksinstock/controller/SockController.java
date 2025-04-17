@@ -3,10 +3,12 @@ package ru.home.socksinstock.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.home.socksinstock.dto.SockDto;
+import ru.home.socksinstock.entity.SockEntity;
 import ru.home.socksinstock.service.SockService;
 
 import java.util.Collection;
@@ -18,11 +20,10 @@ import java.util.Collection;
         description = "Все методы для работы с носками"
 )
 public class SockController {
-
+    @Autowired
     private SockService sockService;
 
-
-    public SockController(SockService sockService){
+    public SockController(SockService sockService) {
         this.sockService = sockService;
     }
 
@@ -30,10 +31,10 @@ public class SockController {
      * Сюда попадают запросы на создание носков
      */
 
-    @PostMapping //POST localhost:8080/api/socks/1
-    @Operation(summary = "Создать носок")
-    public SockDto createSock(@RequestBody SockDto sockDto){
-        return sockService.createdSock(sockDto);
+    @PostMapping("/income") //POST localhost:8080/api/socks/1
+    @Operation(summary = "Регистрация прихода носков")
+    public SockEntity createSock(@RequestBody SockDto sockDto){
+        return sockService.createSock(sockDto);
     }
 
     /***
@@ -58,7 +59,7 @@ public class SockController {
      * Сюда попадают запросы на редактирование носка по id
      */
 
-    @PutMapping("/edit/{id}") // http://localhost:8080/api/socks/edit/1
+    @PutMapping("/{id}") // http://localhost:8080/api/socks/edit/1
     @Operation(summary = "Отредактировать информацию о носках")
     public ResponseEntity<SockDto> editSock(@RequestBody SockDto sockDto){
         SockDto foundSock = sockService.editSock(sockDto);
