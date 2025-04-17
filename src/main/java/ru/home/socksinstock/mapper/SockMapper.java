@@ -11,6 +11,9 @@ import ru.home.socksinstock.entity.SockEntity;
 public interface SockMapper {
 
     SockMapper INSTANCE = Mappers.getMapper(SockMapper.class);
+
     SockDto sockEntityToSockDto(SockEntity sockEntity);
+
     SockEntity sockDtoToSockEntity(SockDto sockDto);
+
 }
