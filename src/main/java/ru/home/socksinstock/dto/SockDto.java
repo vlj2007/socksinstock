@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,5 +15,4 @@ public class SockDto {
     private String color;
     private int percentageOfCotton;
     private int quantity;
-
 }
