@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Schema(description = "Информация о носке")
 @Entity
 @Getter
@@ -13,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 @ToString
 @Table(name = "SOCK")
 public class SockEntity {
